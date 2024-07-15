@@ -1,0 +1,24 @@
+# realm settings
+REALM = 'web_app'
+KEYCLOAK_URL = 'http://localhost:8080'
+APP_SECRET_KEY = "PUT_HERE"
+
+# auth_code.py
+CLIENT_ID_AUTH_CODE = 'auth_code'
+CLIENT_SECRET_AUTH_CODE = 'PUT_HERE'
+
+# auth_code_pkce.py
+CLIENT_ID_AUTH_CODE_PKCE = 'auth_code_pkce'
+
+# implicit.py
+CLIENT_ID_IMPLICIT = 'auth_implicit' 
+
+# client_credentials.py
+CLIENT_ID_PASSWORD = "auth_client_cred"
+CLIENT_SECRET_PASSWORD = "PUT_HERE"
+
+# device_code.py
+CLIENT_ID_DEVICE = 'auth_device'
+
+# ropc.py
+CLIENT_ID_ROPC = "auth_ropc"

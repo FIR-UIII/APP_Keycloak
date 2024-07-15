@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Войти</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Resource owner password code (ROPC)</h2>
+    <p><b> {{ message }}</b></p> 
+    <form action="{{ url_for('ropc.login_ropc') }}" method="post">
+        <div class="form-group">
+            <label for="username">Имя пользователя</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Войти</button>
+        <a href="/" class="btn btn-secondary">Назад</a>
+        <p>Не работает при включенном Consent required и Client authentication OFF (public). Нет функции выхода logout SSO</p> 
+    </form>
+</div>
+</body>
+</html>

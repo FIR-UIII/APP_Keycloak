@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authorization Code Flow</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Authorization Code Flow</h3>
+        <a href="/login_auth" class="btn btn-primary">Войти в сессию</a>
+        <a href="/logout_auth" class="btn btn-primary">Выйти из сессии</a>
+    {% if session %}
+        <h3>Вы успешно авторизовались</h3>
+        <p>Вам присвоен Authorization Code:</p>
+            <div class="alert alert-info" role="alert">
+                <b>AUTH CODE: </b>{{auth_code}}
+            </div>            
+        <p>Authorization Code был успешно обменен на токены:</p>
+            <div class="alert alert-info" role="alert">
+                <b>ACCESS TOKEN: </b>{{ a_token }}
+            </div>
+            <div class="alert alert-info" role="alert">
+                <b>REFRESH TOKEN: </b>{{ r_token }}
+            </div>
+            <div class="alert alert-info" role="alert">
+                <b>ID TOKEN: </b>{{ id_t }}
+            </div>
+    {% else %}
+        <h3>Вы не авторизовались</h3>
+        <p>Authorization Code:</p>
+            <div class="alert alert-info" role="alert">
+                <pre>{{ auth_code }}</pre>
+            </div>
+    {% endif %}
+    <p><a href="/protected_page" class="btn btn-primary">Перейти на защищенную страницу</a></p>
+    <p><a href="/" class="btn btn-secondary">Назад</a></p>
+    </div class="container mt-5">
+</body>
+</html>

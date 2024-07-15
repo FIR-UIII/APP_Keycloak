@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <title>Device Code</title>
+    <script>
+        function requestDeviceCode() {
+            fetch('/get-device-code', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('device-code-result').innerText = 'Device Code: ' + (data.device_code || 'N/A');
+                    document.getElementById('request-access').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('device-code-result').innerText = 'Error obtaining device code';
+                });
+        }
+
+        function requestAccess() {
+            window.open('/user-access-grand', '_blank');
+            document.getElementById('access-grant-result').innerText = 'Разрешение было получено.';
+            document.getElementById('request-token').style.display = 'block';
+        }
+
+        function requestToken() {
+            fetch('/get-token', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('token-result').innerText = 'Access Token: ' + (data.access_token || 'N/A');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('token-result').innerText = 'Error obtaining access token';
+                });
+        }
+
+        window.onload = function() {
+            document.getElementById('request-device-code').onclick = requestDeviceCode;
+            document.getElementById('request-access').onclick = requestAccess;
+            document.getElementById('request-token').onclick = requestToken;
+
+            // Скрывает скопки для каскадного отображения после успешного вызова
+            document.getElementById('request-access').style.display = 'none';
+            document.getElementById('request-token').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Device Code</h3>
+            <button id="request-device-code" class="btn btn-primary">Request Device Code</button><p></p>
+            <div id="device-code-result" class="alert alert-info" role="alert"></div>
+            <button id="request-access" style="display:none;" class="btn btn-primary">Request Access</button><p></p>
+            <div id="access-grant-result" class="alert alert-info" role="alert"></div>
+            <button id="request-token" style="display:none;" class="btn btn-primary">Request Token</button><p></p>
+            <div id="token-result" class="alert alert-info" role="alert"></div>
+            <p><a href="/protected_page" class="btn btn-primary">Перейти на защищенную страницу</a></p>
+            <p><a href="/" class="btn btn-secondary">Назад</a></p>
+            <p><a href="/logout_device_code" class="btn btn-primary">Выйти из сесии</a></p>
+            <p>Client authentication - public</p>
+        </div>
+</body>
+</html>

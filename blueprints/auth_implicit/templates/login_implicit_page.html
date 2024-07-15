@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Implicit flow code grand</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            // парсим результат
+            if (window.location.hash) {
+                const hash = window.location.hash.substr(1);
+                const result = hash.split('&').reduce(function (res, item) {
+                    const parts = item.split('=');
+                    res[parts[0]] = parts[1];
+                    return res;
+                }, {});
+                
+                
+                var access_token = result.access_token;
+                document.getElementById("access_t").innerHTML = access_token;
+                var id_token = result.id_token;
+                document.getElementById("id_t").innerHTML = id_token;
+                // выводим результат в консоль - угроза XSS
+                console.log("Access token:", result.id_token);
+                console.log("ID Token:", result.id_token);
+            }
+        }
+    </script>
+    <div class="container mt-5">
+        <h2>Implicit flow code grand</h2>
+        <a href="/" class="btn btn-secondary">Назад</a>
+        <a href="/login_implicit" class="btn btn-primary">Пройти авторизацию</a>
+        <p>Получен access token (JWT формат):</p>
+            <div class="alert alert-info" role="alert">
+                <p id="access_t"></p>
+            </div>   
+        <p>Получен id token (JWT формат):</p>
+            <div class="alert alert-info" role="alert">
+                <p id="id_t"></p>
+            </div>   
+    </div>
+    <div class="container mt-5">
+    <b>Справочная информация</b>
+    Implicit Flow is designed for applications that can't keep secrets. Private client
+    </div>
+</body>
+</html>

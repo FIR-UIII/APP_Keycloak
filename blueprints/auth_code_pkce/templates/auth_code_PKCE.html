@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PKCE Authorization Flow</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+    <h3>PKCE Authorization Flow</h3>
+        <a href="/login_auth_code_pkce" class="btn btn-primary">Login</a>
+        <p></p>
+    {% if session %}
+        <p class="alert alert-info"><b>Auth Code:</b> {{ code }}</p>
+        <p class="alert alert-info"><b>State:</b> {{ state }}</p>
+        <p class="alert alert-info"><b>Code verifier:</b> {{ code_verifier }}</p>
+        <p><a href="/token_auth_code_pkce" class="btn btn-primary">Получить токены</a></p>
+        <p class="alert alert-info"><b>Access Token:</b> {{ access_token }}</p>
+        <p class="alert alert-info"><b>ID Token: </b>{{ id_token }}</p>
+        <p class="alert alert-info"><b>Refresh Token: </b>{{ r_token }}</p>
+        <p><a href="/protected_page" class="btn btn-primary">Перейти на защищенную страницу</a></p>
+        <p><a href="/logout_auth_pkce" class="btn btn-primary">Выйти из сесcии</a></p>
+    </div>
+    {% endif %}
+    <div class="container mt-5">
+        <p><a href="/" class="btn btn-secondary">Назад</a></p>
+        <p>Требования к настройке стенда Keycloak:</p>
+        1. Client>{realm}>Advanced>Advanced setings>Proof Key for Code Exchange Code Challenge Method=S256</p>
+        2. Client authentication: "public access type - OFF"</p>
+    </div>
+</body>
+</html>

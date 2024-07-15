@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Basic Authentication</title>
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $.ajax({
+        url: '/logout_basic_auth',
+        type: 'GET',
+        success: function(data) {
+          clearCookie('session');
+          window.location.href = '/basic_auth_page';
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container mt-5"">
+    <h2>Успешная аутентификация</h2>
+    <p>Имя пользователя:</p>
+    <div class="alert alert-info" role="alert">
+      <pre>{{ user }}</pre>
+    </div>  
+    <a href="/logout_basic_auth" class="btn btn-primary">Выйти</a>
+  </div>
+</body>
+</html>

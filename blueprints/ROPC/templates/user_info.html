@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Информация о пользователе</h2>
+    {% if user_info %}
+        <div class="alert alert-info" role="alert">
+            <pre>{{ user_info }}</pre>
+        </div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            Информация не была получена.
+        </div>
+    {% endif %}
+    <a href="/" class="btn btn-secondary">Домашняя страница</a>
+    <a href="{{ url_for('ropc.login_ropc') }}" class="btn btn-primary">Назад</a>
+</div>
+</body>
+</html>
