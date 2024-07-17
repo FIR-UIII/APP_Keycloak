@@ -13,7 +13,6 @@ CLIENT_SECRET = env.get("CLIENT_SECRET_AUTH_CODE")
 def auth_code_bp(oauth):
     auth_code_bp = Blueprint("auth_code", __name__, template_folder="templates")
 
-    # TODO: определить место хранения секретов в отдельном хранилище
     oauth.register(
         "auth0",
         client_id=CLIENT_ID,
