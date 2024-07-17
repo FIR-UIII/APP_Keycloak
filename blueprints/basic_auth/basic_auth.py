@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, redirect, url_for, session
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# https://www.digitalocean.com/community/tutorials/how-to-add-authentication-to-your-app-with-flask-login
 
 basic_auth_bp = Blueprint("basic_auth", __name__, template_folder="templates")
 
