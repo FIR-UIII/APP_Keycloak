@@ -6,7 +6,6 @@ from os import environ as env
 # Blueprint for the device code flow
 device_code_bp = Blueprint('device_flow', __name__, template_folder='templates')
 
-#TODO: перенести в единую точку
 KEYCLOAK_URL = env.get('KEYCLOAK_URL')
 REALM = env.get('REALM')
 CLIENT_ID = env.get('CLIENT_ID_DEVICE')
