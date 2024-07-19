@@ -8,7 +8,6 @@ import jwt
 
 auth_code_pkce_bp = Blueprint('auth_code_pkce', __name__, template_folder='templates')
 
-# TODO: нужно сделат одну точку входа для загрузки конфигурации
 KEYCLOAK_URL = env.get('KEYCLOAK_URL')
 REALM = env.get("REALM")
 CLIENT_ID = env.get("CLIENT_ID_AUTH_CODE_PKCE")
