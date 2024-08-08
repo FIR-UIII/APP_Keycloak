@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web_app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.3
+    command: ["start-dev", "--import-realm"]
+    restart: unless-stopped
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/opt/jboss/keycloak/data

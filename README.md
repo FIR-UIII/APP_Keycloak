@@ -4,6 +4,9 @@
 ### Настройка и корректная работа стенда
 1. Установка зависимостей: pip install -r requirements.txt
 2. Настройка стенда KEYCLOAK в режиме DEV. 
+```
+docker run --rm -d --name keycloak_devserver -p 8080:8080 -v ./data:/opt/keycloak/data/import -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:24.0.3 start-dev --import-realm
+```
 3. Конфигурация - realm-export.json, где заданы параметры:
     * Название тенанта (realm): "web_app"
     * Адрес стенда: http://localhost:8000/ (изменить в realm KEYCLOAK)

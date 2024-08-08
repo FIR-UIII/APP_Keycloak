@@ -13,6 +13,9 @@ from blueprints.auth_code_pkce.auth_code_pkce import auth_code_pkce_bp
 from blueprints.basic_auth.basic_auth import basic_auth_bp
 from blueprints.digest_auth.digest_auth import digest_auth_bp
 from blueprints.token_auth.token_auth import token_auth_bp
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # configuration http://localhost:8080/realms/web_app/.well-known/openid-configuration
 app = Flask(__name__)
@@ -105,4 +108,4 @@ def get_kc_public_key():
     return public_key
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=env.get("PORT", 8000), debug=True)
+    app.run(host="0.0.0.0", port=env.get("PORT", 8000), debug=True)
