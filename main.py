@@ -26,8 +26,7 @@ app.config['BASIC_AUTH_USERNAME'] = env.get('BASIC_AUTH_USERNAME')
 app.config['BASIC_AUTH_PASSWORD'] = env.get('BASIC_AUTH_PASSWORD')
 app.config['BASIC_AUTH_FORCE'] = True
 app.config['BASIC_AUTH_REALM'] = env.get('BASIC_AUTH_REALM')
-app.secret_key = env.get("APP_SECRET_KEY") # проверить нужна ли эта строка? при миграции blueprint могли отвалиться зависимости
-
+app.secret_key = env.get("APP_SECRET_KEY")
 
 oauth = OAuth(app)
 # blueprints/auth_code/auth_code.py > Authorization code flow
@@ -108,4 +107,5 @@ def get_kc_public_key():
     return public_key
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=env.get("PORT", 8000), debug=True)
+    print("[info] load ENV: %s" % KEYCLOAK_URL, REALM, app.secret_key)
+    app.run(host="localhost", port=env.get("PORT", 8000), debug=True)

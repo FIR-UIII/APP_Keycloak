@@ -69,7 +69,7 @@ def logout_device_code():
     '''Функция выхода пользователя из сессии на IAM. Очищает и завершает все текущие сессии 
     и возвращает пользователя на основную страницу с использованием метода id_token_hint'''
     refresh_token = session['refresh_token']
-    redirect_uri = 'http://localhost:8000/login_device_code'
+    redirect_uri = 'http://10.5.0.2:8000/login_device_code'
     # проверка наличия токена в сессии flask
     if not refresh_token:
         return "refresh_token не был передан", 400

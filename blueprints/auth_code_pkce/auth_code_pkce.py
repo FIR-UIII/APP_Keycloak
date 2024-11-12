@@ -20,6 +20,12 @@ def generate_code_verifier():
 def generate_code_challenge(code_verifier):
     """Функция создает сессионное значение code challenge на основании входящего параметра code verifier в base64"""
     digest = hashlib.sha256(code_verifier.encode('utf-8')).digest()
+    code_challenge = base64.urlsafe_b64encode(digest).rstrip(b'=').decode('utf-8')
+    if code_challenge:
+        print(f'{code_challenge} [+] code_challenge успешно сгенирован')
+    else:
+        print('[-] Не удалось сгенерировать code_challenge')
+        return "Error generating code_challenge", 500
     return base64.urlsafe_b64encode(digest).rstrip(b'=').decode('utf-8')
 
 @auth_code_pkce_bp.route('/auth_code_PKCE')
@@ -30,11 +36,13 @@ def auth_code_PKCE():
 @auth_code_pkce_bp.route('/login_auth_code_pkce')
 def login_auth_code():
     '''Функция аутентификации пользователя в IAM'''
+    print('[+] Старт аутентификации')
     code_verifier = generate_code_verifier()
     code_challenge = generate_code_challenge(code_verifier)
     session['code_verifier'] = code_verifier
     state = secrets.token_urlsafe(16)  # Генерация случайного значения state
     session['state'] = state
+    print(session['state'])
 
     auth_url = f"{KEYCLOAK_URL}/realms/{REALM}/protocol/openid-connect/auth?client_id={CLIENT_ID}&response_type=code&scope=openid&redirect_uri={REDIRECT_URI}&state={state}&code_challenge={code_challenge}&code_challenge_method=S256"
     
@@ -44,8 +52,11 @@ def login_auth_code():
 def callback_auth_pkce():
     '''Функция принимает ответ от IAM после аутентифкации клиента с параметрами auth_code'''
     session['code'] = request.args.get('code')
+    print(session['code'])
     state = request.args.get('state')
+    print(state)
     session_state = session.get('state')
+    print(session_state)
 
     # Проверка для снижения риска атаки CSRF
     if not state or state != session_state:

@@ -7,7 +7,8 @@ auth_client_credentials_bp = Blueprint("auth_client_credentials", __name__, temp
 
 CLIENT_ID = env.get('CLIENT_ID_PASSWORD')
 CLIENT_SECRET = env.get('CLIENT_SECRET_PASSWORD')
-KEYCLOAK_TOKEN_URL = 'http://localhost:8080/realms/web_app/protocol/openid-connect/token'
+KEYCLOAK_URL = env.get('KEYCLOAK_URL')
+KEYCLOAK_TOKEN_URL = f'http://{KEYCLOAK_URL}:8080/realms/web_app/protocol/openid-connect/token'
 
 data = {
         'grant_type':'client_credentials',
